@@ -1,0 +1,48 @@
+
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: darkgray;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" >
+        <img src={{ImagenLogo}} width="80" height="30">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Genero
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Hombre</a></li>
+              <li><a class="dropdown-item" href="#">Mujer</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Categorias</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Carrito</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)] = aBuscar (keyup)="oneKeyup()" name = "submitSearch"/>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div>
+    <img src={{ImagenLogo}} class="img-thumbnail" alt="...">
+  </div>
+  <div class="mostSellSection">
+    <div class="mostSellsTitle">
+      <h1>Productos mas vendidos</h1>
+    </div>
+    <div class="mostSellList">
+      <app-best-sells></app-best-sells>
+    </div>
+  </div>
+  <hr size="4px">
+  <div class="list">
+      <app-product-grid></app-product-grid>
+  </div>
+  

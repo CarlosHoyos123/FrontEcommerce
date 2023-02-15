@@ -1,0 +1,11 @@
+import { ProductStock } from "./productStock"
+import { Color } from "./color"
+import { Size } from "./size"
+import { ProductDetailed } from "./ProductDetailed"
+
+export interface ProductSummary {
+    Stock: ProductStock[];
+    colors: Color[];
+    sizes: Size[];
+    detalle: ProductDetailed;
+}
