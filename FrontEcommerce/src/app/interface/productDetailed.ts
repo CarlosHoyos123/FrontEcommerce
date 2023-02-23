@@ -1,8 +1,8 @@
-export interface ProductDetailed {
+export interface productInfo {
     plu:            String;
     nombre:         String;
     fabricante:     String;
     precio:         Number;
     descripcion:    String;
-    rutaForo:       String;
+    rutaFoto:       String;
 }

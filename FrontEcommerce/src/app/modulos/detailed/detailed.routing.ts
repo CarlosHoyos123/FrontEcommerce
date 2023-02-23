@@ -3,6 +3,6 @@ import { CartDescriptionComponent } from "./cart-description/cart-description.co
 import { ProductDescriptionComponent } from "./product-description/product-description.component";
 
 export const detailedRouting: Route[] = [
-    {path: 'detail', component: ProductDescriptionComponent},
+    {path: 'detail/:id', component: ProductDescriptionComponent},
     {path: 'carrito', component: CartDescriptionComponent}
 ]

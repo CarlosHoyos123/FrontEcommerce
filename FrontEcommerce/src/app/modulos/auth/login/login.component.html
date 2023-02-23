@@ -1,21 +1,21 @@
 <div class="formulario">
     <form>
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" [ngModel]="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="exampleInputEmail1" class="form-label">Correo o usuario</label>
+          <input name = "correo" type="email" [(ngModel)]="login.correo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input name="clave"  type="password" class="form-control" id="exampleInputPassword1">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input name="clave" [(ngModel)]="login.clave" type="password" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          <label class="form-check-label" for="exampleCheck1">Darme de baja</label>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Ingresar</button>
         <div class="sing-in">
-          <a href="">No estas registrado? <span>REGISTRATE AQUÍ</span></a>
+          <a routerLink="/Auth/registro" >No estas registrado? <span>REGISTRATE AQUÍ</span></a>
         </div>
       
       </form>

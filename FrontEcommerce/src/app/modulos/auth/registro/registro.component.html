@@ -2,88 +2,77 @@
   <form class="row g-3">
     <div class="col-md-4">
       <label for="inputEmail4" class="form-label">Correo</label>
-      <input type="email" class="form-control form-control-sm" id="inputEmail4">
+      <input type="email" name="correo" [(ngModel)]="newUser.email" class="form-control form-control-sm" id="inputEmail4">
     </div>
     <div class="col-md-4">
       <label for="inputPassword4" class="form-label">Contraseña</label>
-      <input type="password" class="form-control form-control-sm" id="inputPassword4">
+      <input type="password" name="clave" [(ngModel)]="newUser.contrasenia" class="form-control form-control-sm" id="inputPassword4">
     </div>
     <div class="col-md-4">
       <label for="inputPassword4" class="form-label">Confirme Contraseña</label>
-      <input type="password" class="form-control form-control-sm" id="inputPassword4">
+      <input type="password" name="claveConfirmacion" [(ngModel)]="passwordConfirm" class="form-control form-control-sm" id="inputPassword4">
     </div>
     <div class="row">
       <div class="col-4">
         <label for="inputAddress" class="form-label">Primer nombre</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" name="primerNombre" [(ngModel)]="newUser.primerNombre" class="form-control" id="inputAddress">
       </div>
       <div class="col-4">
         <label for="inputAddress" class="form-label">Segundo Nombre</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" name="segundoNombre" [(ngModel)]="newUser.segundoNombre" class="form-control" id="inputAddress">
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <label for="inputAddress" class="form-label">Primer Apellido</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" name="primerApellido" [(ngModel)]="newUser.primerApellido" class="form-control" id="inputAddress">
       </div>
       <div class="col-md-4">
         <label for="inputAddress" class="form-label">Segundo Apellido</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" name="segundoApellido" [(ngModel)]="newUser.segundoApellido" class="form-control" id="inputAddress">
       </div>
     </div>
     <div class="row">
       <div class="col-4">
         <label for="exampleFormControlSelect1">Tipo Documento</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-control" id="exampleFormControlSelect1"> 
+          <option *ngFor="let type if idTypes" [value]="idTypes">
+            {{type.tipoDocumento}}
+          </option>
+
         </select>
       </div>
       <div class="col-4">
         <label for="inputAddress" class="form-label">Numero Documento</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" name="numeroDocumento" [(ngModel)]="newUser.numeroDocumento" class="form-control" id="inputAddress">
       </div>
       <div class="col-4">
         <label for="exampleFormControlSelect1">Pais</label>
         <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+          <option *ngFor="let country of countries" [value]="country">
+            {{country.nombrePais}}
+          </option>
         </select>
       </div>
     </div>
     <div class="row">
       <div class="col-4">
         <label for="inputAddress" class="form-label">Numero de teléfono</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" name="numeroTelefono" [(ngModel)]="newUser.telefono" class="form-control" id="inputAddress">
       </div>
       <div class="col-4">
         <label for="exampleFormControlSelect1">Tipo de telefono</label>
         <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+          <option *ngFor="let phone of phoneTypes" [value]="phoneTypes">
+            {{phone.tipoTelefono}}
+          </option>
+
         </select>
       </div>
     </div>
     <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
+      <button type="submit" class="btn btn-primary" (click)="onregistry()">Registrarse</button>
+      <a  routerLink="/Auth/login">Ya estoy registrado</a>
     </div>
   </form>
-</div>
+</div>34

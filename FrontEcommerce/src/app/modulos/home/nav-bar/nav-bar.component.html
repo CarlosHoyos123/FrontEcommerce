@@ -21,7 +21,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Carrito</a>
+            <a class="nav-link" href="#" (click)="toCart()">Carrito</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
@@ -30,15 +30,24 @@
       </div>
     </div>
   </nav>
-  <div>
+  <!-- <div>
     <img src={{ImagenLogo}} class="img-thumbnail" alt="...">
-  </div>
+  </div> -->
   <div class="mostSellSection">
-    <div class="mostSellsTitle">
-      <h1>Productos mas vendidos</h1>
-    </div>
-    <div class="mostSellList">
-      <app-best-sells></app-best-sells>
+    <div class="row">
+      <div *ngIf="searchRunning; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock> 
+        <h1>Busqueda.</h1>
+        <div *ngFor="let product of searchResult" class="col-2">
+          <app-best-sells [productP]="product"></app-best-sells>
+        </div>
+      </ng-template>
+      <ng-template #elseBlock>
+        <h1>Productos mas vendidos</h1>
+        <div *ngFor="let product of mostSellingp" class="col-2">
+          <app-best-sells [productP]="product"></app-best-sells>
+        </div>
+      </ng-template>
     </div>
   </div>
   <hr size="4px">

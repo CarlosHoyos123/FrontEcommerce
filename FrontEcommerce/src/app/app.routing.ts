@@ -3,7 +3,8 @@ import { LayoutHomeComponent } from "./modulos/layaout/layout-home/layout-home.c
 import { LayoutLoginComponent } from "./modulos/layaout/layout-login/layout-login.component";
 
 export const appRutas: Route[] = [
-    { path: '', pathMatch: 'full', redirectTo: 'home' },
+    //{ path: '**', component: PageNotFoundComponent },
+    { path: '', pathMatch: 'full', redirectTo: 'Home' },
     {
         path: 'Auth',
         component: LayoutLoginComponent,

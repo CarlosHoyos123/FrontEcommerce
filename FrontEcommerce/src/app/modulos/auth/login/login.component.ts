@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/interface/login';
-import { RespuestaApi } from 'src/app/interface/respuestaapi';
+import { RespuestaAuth } from 'src/app/interface/respuestaAuth';
 import { AuthServicio } from 'src/app/servicios/auth.service';
 
 @Component({
@@ -11,17 +11,16 @@ import { AuthServicio } from 'src/app/servicios/auth.service';
 })
 export class LoginComponent {
 
-  public login: Login = { Correo: '', Clave: '' }
+  public login: Login = { correo: '', clave: '' }
 
-  constructor(private _servicio: AuthServicio, private _router: Router) {
-
-  }
+  constructor(private _servicio: AuthServicio, private _router: Router) 
+  { }
 
   onSubmit() {
     this._servicio.Login(this.login)
-      .subscribe((respuesta: RespuestaApi) => {
-        alert("Hubo respuesta");
+      .subscribe((respuesta: RespuestaAuth) => {
         console.log(respuesta);
+        this._router.navigate(['Tienda/home']);
       }).add(() => {
 
       });

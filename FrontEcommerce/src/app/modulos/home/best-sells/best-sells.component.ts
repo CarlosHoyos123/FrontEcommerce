@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ProductEntity } from 'src/app/interface/productEntity';
 
 @Component({
   selector: 'app-best-sells',
@@ -8,5 +9,6 @@ import { Component } from '@angular/core';
 export class BestSellsComponent {
 
   rutaImagen = "../../../../assets/images/No_disponible.jpg";
-
+  
+  @Input() productP?: ProductEntity;
 }

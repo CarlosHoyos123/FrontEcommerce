@@ -4,6 +4,8 @@ import { ProductDescriptionComponent } from './product-description/product-descr
 import { RouterModule } from '@angular/router';
 import { detailedRouting } from './detailed.routing';
 import { CartDescriptionComponent } from './cart-description/cart-description.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -14,7 +16,8 @@ import { CartDescriptionComponent } from './cart-description/cart-description.co
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(detailedRouting)
+    RouterModule.forChild(detailedRouting),
+    FormsModule
   ]
 })
 export class DetailedModule { }

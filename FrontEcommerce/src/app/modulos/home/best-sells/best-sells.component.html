@@ -1,8 +1,9 @@
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src={{rutaImagen}} alt="Card image cap">
+  
+  <div class="card p-2 m-2" style="width: 18rem;">
+    <img class="card-img-top" src={{productP?.rutaFoto}} alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">titulo producto</h5>
-      <p class="card-text">Este es uno de los productos mas vendidos.</p>
-      <a href="#" class="btn btn-primary">Ir al producto</a>
+      <h5 class="card-title">{{productP?.producto}}</h5>
+      <p class="card-text">{{productP?.descripcion}}.</p>
+      <a  [routerLink]="['/Tienda/detail', productP?.id]" class="btn btn-primary">Ir al producto</a>
     </div>
   </div>

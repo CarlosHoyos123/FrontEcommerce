@@ -1,33 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Autorizacion } from 'src/app/interface/autorizacion';
+
 import { ProductEntity } from 'src/app/interface/productEntity';
-import { ProductService } from 'src/app/servicios/product.service';
+import { AuthServicio } from 'src/app/servicios/auth.service';
+import { productServicio } from 'src/app/servicios/product.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent {
 
-  constructor(private ProdService: ProductService
-  ) {}
+export class NavBarComponent implements OnInit{
+
+  constructor(
+    private _service: AuthServicio,
+    private _productService: productServicio,
+    private _router: Router) {}
 
   aBuscar= "";
-  ImagenLogo =  "../../../../assets/images/Fondo.jpg";
+  searchRunning: boolean = false;
+  ImagenLogo =  "../../../../assets/images/Convertic.JPG";
   welcomeImagenPath = "";
-  respuestaBusqueda: ProductEntity[] = [];
+  autorizacion?: Autorizacion;
+  mostSellingp: ProductEntity[] = [];
+  searchResult: ProductEntity[] = [];
 
+  ngOnInit(){
+    this._service.session;
+    this.loadMostSelling();
+  }
+  
   oneKeyup(){
-    if(this.aBuscar != ''){
-      this.ProdService.SearchBarRequest(this.aBuscar)
-      .subscribe(respuesta => {
-        console.log(respuesta);
-      },
-      (error) => {
-        console.log(error);
-      });
-    }else{
-    this.respuestaBusqueda = [];
-    }
+    if (this.aBuscar != '') {
+      this.searchRunning = true;
+      this._productService.searchresults(this.aBuscar).
+        subscribe((results: ProductEntity[])=>{
+          this.searchResult = results;
+        }).add()
+      }else{
+        this.searchRunning = false;
+      }
+  }
+
+  toCart(){
+    this._router.navigate(['Tienda/carrito']); 
+  }
+
+  loadMostSelling(){
+    this._productService.mostSellingList()
+      .subscribe((seleccion: ProductEntity[]) =>
+        {
+          this.mostSellingp = seleccion;
+        })
+      .add()
   }
 }
