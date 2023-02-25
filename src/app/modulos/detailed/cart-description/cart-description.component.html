@@ -1,0 +1,38 @@
+<div><p class="text-center text-uppercase fs-1">Carrito de compras</p></div>
+<div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Talla</th>
+        <th scope="col">Color</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Sub total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td >{{item.producto.producto}}</td>
+        <td >{{item.talla.talla}}</td>
+        <td >{{item.color.color}}</td>
+        <td>{{item.producto.precio}}</td>
+        <td>{{item.cantidad}}</td>
+        <td>0000</td>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteItemInCar(item)">Eliminar</button>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr size="8px"/>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="col-6" data-bs-theme="dark">
+      <button type="button" class="btn btn-dark" (click)="goToHome()">Seguir comprando</button>
+    </div>
+    <div class="col-6" data-bs-theme="dark">
+      <button type="button" class="btn btn-dark" (click)="terminateSell()">Confirmar rcompra</button>
+    </div>
+  </div>
+</div>
