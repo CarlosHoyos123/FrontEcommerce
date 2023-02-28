@@ -7,7 +7,7 @@ import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { AuthServicio } from './../auth.service';
 
 // Parametros
-import { environment } from 'src/environments/environment.localhost';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
@@ -52,7 +52,7 @@ export class Interceptor implements HttpInterceptor {
 
         if (this._authService.session) {
             const contentType = !uploadFile ? { 'content-type': 'application/json' } : {};
-            headers = req.clone({ setHeaders: { 'Authorization': 'Bearer ' + this._authService.token, ...contentType, } });
+            headers = req.clone({ setHeaders: { 'Authorization': 'Bearer ', ...contentType, } });
         } else {
             if (!uploadFile) { headers = req.clone({ setHeaders: { 'content-type': 'application/json' } }); }
             else { headers = req.clone(); }

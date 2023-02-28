@@ -26,7 +26,7 @@ export class CartDescriptionComponent implements OnInit{
   };
   confirmInformation: SellConfirmation = {
     invoice: {
-      fecha: ,
+      fecha: '',
       cliente: 0,
       dir_envio: 0,
       dir_facturacion: 0,
@@ -44,8 +44,8 @@ export class CartDescriptionComponent implements OnInit{
 
   ngOnInit(): void {
     let session = this._Auth.session;
-    this.cliente = session.cliente.primerNombre;
-    this._carService.checkClientCar(session.cliente.cliente). 
+    this.cliente = session.client.primerNombre;
+    this._carService.checkClientCar(session.client.cliente). 
     subscribe((response: CarResponse[])=>{
       this.items = response;
       console.log(this.items);

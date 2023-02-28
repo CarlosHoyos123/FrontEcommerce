@@ -93,7 +93,7 @@ this._service.ProductDetail(this.productId).
 
 itemToCart(){
   let session = this._Auth.session;
-  this.toCarData.cliente = session.cliente.cliente;
+  this.toCarData.cliente = session.client.cliente;
   this.toCarData.color = this.selectedColor;
   this.toCarData.talla = this.selectedSize;
   this.toCarData.cantidad = this.quantitySelected

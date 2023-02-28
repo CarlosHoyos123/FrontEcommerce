@@ -1,4 +1,4 @@
 export const environment = {
-    url: 'http://cursoangular.ci4.cognox.com/Api01',
+  url: 'http://localhost:8090',
   };
   

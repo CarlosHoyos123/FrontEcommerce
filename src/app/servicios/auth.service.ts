@@ -6,7 +6,9 @@ import { Observable, of, switchMap } from 'rxjs';
 import { Login } from '../interface/login';
 import { RespuestaApi } from '../interface/respuestaapi';
 import { environment } from 'src/environments/environment';
-import { Autorizacion } from '../interface/autorizacion';
+import { FormConfig } from '../interface/formsConfig';
+import { ClientEntity } from '../interface/clientEntity';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -14,52 +16,56 @@ import { Autorizacion } from '../interface/autorizacion';
 
 export class AuthServicio {
 
-    //private url: string = 'http://cursoangular.ci4.cognox.com/Api00/Autorizacion/';
-    /** Propiedad Autenticación */
     private _authenticated: boolean = false;
 
-    private url: string = 'Autorizacion/';
+    private url: string = 'Auth/';
 
     /** Propiedad configuración */
-    private configSession: string = 'Peliculas';
+    private configSession: string = 'Usuario';
 
 
-    constructor(private _http: HttpClient) {
+    constructor(
+        private _http: HttpClient,
+        private _router: Router) {
     }
 
-    Login(login: Login): Observable<any> {
-
+    Login(login: Login): Observable<RespuestaApi> {
         let body = JSON.stringify(login);
-        const url = `${this.url}Autenticacion`;
-
+        const url = `${this.url}user`;
         return this._http.post<RespuestaApi>(url, body)
-            .pipe(
-                switchMap((response: RespuestaApi) => {
-                    if (response.Mensaje.Estado) {
-                        this.session = response.Datos;  // Asigna información del token
-                        this._authenticated = true;     // Indica que usuario es autenticado
-                    }
-                    return of(response);                // Return a new observable with the response
-                })
-            );
     }
 
-    set session(auth: Autorizacion) {
+    formsInfo(){
+        const url = `${this.url}formConfig`;
+        return this._http.get<FormConfig>(url)
+    }
+
+    createUser(newUser: ClientEntity){
+        let body = JSON.stringify(newUser);
+        const url = `${this.url}create`;
+        return this._http.post<ClientEntity>(url, body)
+    }
+
+    cerrarSesion()
+    {
+        localStorage.removeItem(this.configSession);
+        return of(true);
+    }
+
+    set session(auth: RespuestaApi) {
+        console.log("En guardar respuesta")
         localStorage.setItem(this.configSession, JSON.stringify(auth));
     }
 
-    get session(): Autorizacion {
+    get session(): RespuestaApi {
+        console.log("revisando session");
         if (localStorage.getItem(this.configSession) === undefined) {
-            //cerrar
+            console.log("yendo a login");
+            this._router.navigate(['Auth/login']);
         }
         const sessionJson = localStorage.getItem(this.configSession);
-        const session: Autorizacion = sessionJson !== null ? JSON.parse(sessionJson) : null;
+        const session: RespuestaApi = sessionJson !== null ? JSON.parse(sessionJson) : null;
         return session;
     }
 
-    get token(): string {
-        const sessionJson = localStorage.getItem(this.configSession);
-        const session: Autorizacion = sessionJson !== null ? JSON.parse(sessionJson) : null;
-        return session.Token!;
-    }
 }

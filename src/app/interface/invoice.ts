@@ -1,5 +1,5 @@
 export interface Invoice{
-    fecha: Date;
+    fecha: String;
     cliente: number;
     total: number;
     estado: number;

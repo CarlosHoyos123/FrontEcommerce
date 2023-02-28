@@ -11,7 +11,7 @@ import { AuthServicio } from 'src/app/servicios/auth.service';
 })
 export class LoginComponent {
 
-  public login: Login = { Correo: '', Clave: '' }
+  public login: Login = { correo: '', clave: '' }
 
   constructor(private _servicio: AuthServicio, private _router: Router) {
 
@@ -19,9 +19,11 @@ export class LoginComponent {
 
   onSubmit() {
     this._servicio.Login(this.login)
-      .subscribe((respuesta: RespuestaApi) => {
-        alert("Hubo respuesta");
-        console.log(respuesta);
+      .subscribe((response: RespuestaApi) => {
+        if (response.state) {
+          this._servicio.session = response;  // Asigna información del token
+      }
+        this._router.navigate(['Tienda/home']);
       }).add(() => {
 
       });

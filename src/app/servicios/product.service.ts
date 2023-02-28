@@ -1,24 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of, switchMap } from 'rxjs';
 
-
-/* interfaces */
-
+/** Interfaces */
+import { Router } from '@angular/router';
 import { ProductEntity } from '../interface/productEntity';
-import { environment } from 'src/environments/environment.localhost';
+import { DetailResponse } from '../interface/detailResponse';
+import { HomeGridProduct } from '../interface/homeGridPriduct';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 
-export class ProductService {
+export class productServicio {
 
-  url = environment;
+    private url: string = 'home/';
+    
+    constructor(
+        private _http: HttpClient,
+        private _router: Router) {
+    }
 
-  constructor(private http:HttpClient) { }
+mostSellingList(): Observable <ProductEntity[]>{
+    const url = `${this.url}prodcuts/mostSelling`;
+    return this._http.get<any>(url)
+}
 
-  SearchBarRequest(aBuscar: String){
-    return this.http.get<ProductEntity[]>(this.url+'home/products/names/'+ aBuscar, { responseType: 'json'});
-  }
-  
+searchresults(aBuscar: String): Observable <ProductEntity[]>{
+    const url = `${this.url}products/names/`+aBuscar;
+    return this._http.get<any>(url)
+}
+
+ProductDetail(id: Number): Observable<DetailResponse> {
+    let body = JSON.stringify(id);
+    const url = `${this.url}product/detail`;
+    return this._http.post<DetailResponse>(url, body)
+}
+
+sexProductList(sex: String){
+    const url = `${this.url}list/`+sex;
+    return this._http.get<HomeGridProduct[]>(url)
+}
 }

@@ -1,31 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, makeEnvironmentProviders, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HomeGridProduct } from 'src/app/interface/homeGridPriduct';
 import { ProductEntity } from 'src/app/interface/productEntity';
-import { ProductService } from 'src/app/servicios/product.service';
+import { AuthServicio } from 'src/app/servicios/auth.service';
+import { productServicio } from 'src/app/servicios/product.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent {
 
-  constructor(private ProdService: ProductService
-  ) {}
+export class NavBarComponent implements OnInit{
 
+  constructor(
+    private _service: AuthServicio,
+    private _productService: productServicio,
+    private _router: Router) {}
+
+  sex: String = "man";
   aBuscar= "";
-  respuestaBusqueda: ProductEntity[] = [];
-
+  searchRunning: boolean = false;
+  ImagenLogo =  "../../../../assets/images/Convertic.JPG";
+  welcomeImagenPath = "";
+  mostSellingp: ProductEntity[] = [];
+  searchResult: ProductEntity[] = [];
+  productsMainGridList: HomeGridProduct[] = [];
+  
+  ngOnInit(){
+    this._service.session;
+    this.loadMostSelling();
+    this.gridSexProductList();
+  }
+  
   oneKeyup(){
-    if(this.aBuscar != ''){
-      this.ProdService.SearchBarRequest(this.aBuscar)
-      .subscribe(respuesta => {
-        console.log(respuesta);
-      },
-      (error) => {
-        console.log(error);
-      });
-    }else{
-    this.respuestaBusqueda = [];
-    }
+    if (this.aBuscar != '') {
+      this.searchRunning = true;
+      this._productService.searchresults(this.aBuscar).
+        subscribe((results: ProductEntity[])=>{
+          this.searchResult = results;
+        }).add()
+      }else{
+        this.searchRunning = false;
+      }
+  }
+
+  toCart(){
+    this._router.navigate(['Tienda/carrito']); 
+  }
+
+  loadMostSelling(){
+    this._productService.mostSellingList()
+      .subscribe((seleccion: ProductEntity[]) =>
+        {
+          this.mostSellingp = seleccion;
+        })
+      .add()
+  }
+
+  gridSexProductList(){
+    this._productService.sexProductList(this.sex). 
+      subscribe((response: HomeGridProduct[]) =>{
+        this.productsMainGridList = response;
+      })
   }
 }

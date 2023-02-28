@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { HomeGridProduct } from 'src/app/interface/homeGridPriduct';
 
 @Component({
   selector: 'app-product-grid',
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
 export class ProductGridComponent {
 
   rutaImagen = "../../../../assets/images/No_disponible.jpg";
+
+  @Input() mainList?: HomeGridProduct;
 }

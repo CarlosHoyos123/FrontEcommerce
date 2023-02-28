@@ -2,75 +2,72 @@
   <form class="row g-3">
     <div class="col-md-4">
       <label for="inputEmail4" class="form-label">Correo</label>
-      <input type="email" class="form-control form-control-sm" id="inputEmail4">
+      <input type="email" class="form-control form-control-sm" id="inputEmail4" name="email" [(ngModel)] = newUser.email>
     </div>
     <div class="col-md-4">
       <label for="inputPassword4" class="form-label">Contraseña</label>
-      <input type="password" class="form-control form-control-sm" id="inputPassword4">
+      <input type="password" class="form-control form-control-sm" id="inputPassword4" name="password" [(ngModel)] = newUser.contrasenia>
     </div>
     <div class="col-md-4">
       <label for="inputPassword4" class="form-label">Confirme Contraseña</label>
-      <input type="password" class="form-control form-control-sm" id="inputPassword4">
+      <input type="password" class="form-control form-control-sm" id="inputPassword4" name="passwordConfirm" [(ngModel)] = passwordConfirm>
     </div>
     <div class="row">
       <div class="col-4">
         <label for="inputAddress" class="form-label">Primer nombre</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" class="form-control" id="inputAddress" name="pnombre" [(ngModel)] = newUser.primerNombre>
       </div>
       <div class="col-4">
         <label for="inputAddress" class="form-label">Segundo Nombre</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" class="form-control" id="inputAddress" name="snombre" [(ngModel)] = newUser.segundoNombre>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <label for="inputAddress" class="form-label">Primer Apellido</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" class="form-control" id="inputAddress" name="papellido" [(ngModel)] = newUser.primerApellido>
       </div>
       <div class="col-md-4">
         <label for="inputAddress" class="form-label">Segundo Apellido</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" class="form-control" id="inputAddress" name="sapellido" [(ngModel)] = newUser.segundoApellido>
       </div>
     </div>
     <div class="row">
       <div class="col-4">
         <label for="exampleFormControlSelect1">Tipo Documento</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-control" id="exampleFormControlSelect1" name="tipoDocumento" [(ngModel)] = newUser.tipoDocumento.id>
+          <option value="">Seleccione.</option>
+          <option *ngFor="let documento of selectDocumentInfo" value= {{documento.id}}>
+            {{documento.tipoDocumento}}
+          </option>
         </select>
       </div>
       <div class="col-4">
         <label for="inputAddress" class="form-label">Numero Documento</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" class="form-control" id="inputAddress" name="numDocumento" [(ngModel)] = newUser.numeroDocumento>
       </div>
       <div class="col-4">
         <label for="exampleFormControlSelect1">Pais</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-control" id="exampleFormControlSelect1"  name="pais"  [(ngModel)] = newUser.pais.id>
+          <option value="">Seleccione.</option>
+          <option *ngFor="let pais of selectCountryInfo" value= {{pais.id}}>
+            {{pais.nombrePais}}
+          </option>
         </select>
       </div>
     </div>
     <div class="row">
       <div class="col-4">
         <label for="inputAddress" class="form-label">Numero de teléfono</label>
-        <input type="text" class="form-control" id="inputAddress">
+        <input type="text" class="form-control" id="inputAddress" name="Telefono" [(ngModel)] = newUser.telefono>
       </div>
       <div class="col-4">
         <label for="exampleFormControlSelect1">Tipo de telefono</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select class="form-control" id="exampleFormControlSelect1" name="tipoTelefono" [(ngModel)] = newUser.tipoTelefono.id>
+          <option value="">Seleccione.</option>
+          <option *ngFor="let type of selectPhoneInfo" value= {{type.id}}>
+            {{type.tipoTelefono}}
+          </option>
         </select>
       </div>
     </div>
@@ -82,8 +79,9 @@
         </label>
       </div>
     </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    <div class="sing-in">
+      <a [routerLink]="['/Auth/login']">No estas registrado? <span>REGISTRATE AQUÍ</span></a>
     </div>
   </form>
 </div>
