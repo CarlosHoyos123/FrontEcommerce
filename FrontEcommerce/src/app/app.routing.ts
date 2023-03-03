@@ -29,5 +29,5 @@ export const appRutas: Route[] = [
                     .then(m => m.DetailedModule)
             }
         ]
-    },
+    }
 ];

@@ -15,7 +15,7 @@ import { carServicio } from 'src/app/servicios/car.service';
   templateUrl: './product-description.component.html',
   styleUrls: ['./product-description.component.css']
 })
-export class ProductDescriptionComponent {
+export class ProductDescriptionComponent implements OnInit{
 
   load: boolean = false
   productId:number = 0
@@ -29,7 +29,8 @@ export class ProductDescriptionComponent {
   // ----------------
   colors: colorsAvailable[] =[];
   sizes: Size[] =[];
-  stocks: ProductStock[] =[];
+  stocks: ProductStock[] = [];
+  FilteredColorsBySize: colorsAvailable[] = [];
   //------------------
   toCarData: ItemToCar ={
     cliente: 0,
@@ -61,14 +62,32 @@ ngOnInit(){
   this.productDetail();
 }
 
-toggleColor(color:number){
-  this.selectedColor = color;
+toggleColor(color:colorsAvailable){
+  this.selectedColor = color.id;
   this.quantityShown();
 }
 
-toggleSize(size: number){
-  this.selectedSize = size;
+toggleSize(size: Size){
+  this.selectedSize = size.id;
+  this.filterColorBySize(size);
   this.quantityShown();
+}
+
+filterColorBySize(size:Size){
+  this.FilteredColorsBySize.length = 0;
+  this.stocks.forEach(oneStock => {
+    if(oneStock.talla == size.id){
+      this.findColorEntityBiId(oneStock.color);
+    }
+  });
+}
+
+findColorEntityBiId(id: number){
+  this.colors.forEach(oneColor => {
+    if(oneColor.id == id){
+      this.FilteredColorsBySize.push(oneColor);
+    }
+  });
 }
 
 quantityShown(){
@@ -92,16 +111,21 @@ this._service.ProductDetail(this.productId).
 }
 
 itemToCart(){
-  let session = this._Auth.session;
-  this.toCarData.cliente = session.cliente.cliente;
-  this.toCarData.color = this.selectedColor;
-  this.toCarData.talla = this.selectedSize;
-  this.toCarData.cantidad = this.quantitySelected
-  this.toCarData.producto = this.productId;
-  this._carService.addToCar(this.toCarData).
-    subscribe((response: ItemToCar)=>{
-      alert("hemos agregado el producto"+response.producto+" en: "+response.cantidad+".")
-    }).add()
+  if(this.selectedSize == 0 || this.selectedColor == 0){
+    alert("Seleccione talla y color");
+    }else{
+    let session = this._Auth.session;
+    this.toCarData.cliente = session.client.cliente;
+    this.toCarData.color = this.selectedColor;
+    this.toCarData.talla = this.selectedSize;
+    this.toCarData.cantidad = this.quantitySelected
+    this.toCarData.producto = this.productId;
+    console.log(this.toCarData);
+    this._carService.addToCar(this.toCarData).
+      subscribe((response: ItemToCar)=>{
+        alert("Se ha agregado el producto al carrito")
+      }).add()
+  }
 }
 
 goToCart(){

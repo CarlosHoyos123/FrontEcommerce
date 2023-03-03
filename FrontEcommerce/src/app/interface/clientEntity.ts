@@ -1,3 +1,7 @@
+import { Country } from "./country";
+import { IdType } from "./idType";
+import { PhoneType } from "./phoneType";
+
 export interface ClientEntity{
     cliente:            number;
     email:              String;
@@ -6,9 +10,9 @@ export interface ClientEntity{
     segundoNombre:      String;
     primerApellido:     String;
     segundoApellido:    String;
-    tipoTelefono:       Number;
+    tipoTelefono:       PhoneType;
     telefono:           String;
-    pais:               Number;
+    pais:               Country;
     numeroDocumento:    String;
-    tipoDocumento: number;
+    tipoDocumento:      IdType;
 }

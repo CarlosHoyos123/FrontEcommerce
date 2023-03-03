@@ -1,0 +1,9 @@
+<div class=" container text-center">
+<div *ngIf="color == undefined; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock> 
+            <button type="button" class="btn btn-secondary" (click)="sizeOptionChange()">{{option?.talla}}</button>
+        </ng-template>
+        <ng-template #elseBlock>
+            <button type="button" class="btn btn-secondary" (click)="colorOptionChange()">{{color?.color}}</button>
+        </ng-template>
+</div>

@@ -1,9 +1,8 @@
-  
-  <div class="card p-2 m-2" style="width: 18rem;">
-    <img class="card-img-top" src={{productP?.rutaFoto}} alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{productP?.producto}}</h5>
-      <p class="card-text">{{productP?.descripcion}}.</p>
-      <a  [routerLink]="['/Tienda/detail', productP?.id]" class="btn btn-primary">Ir al producto</a>
-    </div>
+<div class="card p-2 m-2" >
+  <img class="card-img-top" src={{productP?.rutaFoto}} alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{productP?.producto}}</h5>
+    <p class="card-text">{{productP?.descripcion}}.</p>
+    <a  [routerLink]="['/Tienda/detail', productP?.id]" class="btn btn-primary">Ir al producto</a>
   </div>
+</div>

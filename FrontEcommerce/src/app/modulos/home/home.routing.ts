@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { GridListComponent } from './grid-list/grid-list.component';
+
 
 export const homeRouting: Route[] = [
-    {  path: 'home', component: NavBarComponent},
+    {  path: 'home/:gender', component: GridListComponent},
 ]

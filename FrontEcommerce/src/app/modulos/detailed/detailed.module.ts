@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { detailedRouting } from './detailed.routing';
 import { CartDescriptionComponent } from './cart-description/cart-description.component';
 import { FormsModule } from '@angular/forms';
+import { SelectButtonComponent } from './product-description/buttons/select-button/select-button.component';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ProductDescriptionComponent,
-    CartDescriptionComponent
+    CartDescriptionComponent,
+    SelectButtonComponent
   ],
   imports: [
     CommonModule,
