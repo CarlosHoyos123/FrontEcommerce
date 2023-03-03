@@ -11,13 +11,17 @@ import { LayoutHomeComponent } from './modulos/layaout/layout-home/layout-home.c
 import { appRutas } from './app.routing';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './servicios/base/inteceptor';
+import { NavBarComponent } from './modulos/layaout/layout-home/navigationBar/nav-bar/nav-bar.component';
+import { BestSellsComponent } from './modulos/home/best-sells/best-sells.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutLoginComponent,
-    LayoutHomeComponent
+    LayoutHomeComponent,
+    BestSellsComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

@@ -20,38 +20,45 @@
           <p class="fst-italic fs-5">Seleccione talla para ver disponibilidad de colores</p>
           <p class="fs-2"> Seleccione talla. </p>
           <div class="container text-center">
-            <div class="row row-cols-2" *ngFor="let size of sizes">
-              <button type="button" class="btn btn-secondary btn-lg" (click)="toggleSize(size.id)">{{size.talla}}</button>
+            <div class="row row-cols-1 row-cols-md-2">
+              <div class="container text-center">
+                <div class="form-floating">
+                  <select class="form-select form-select-lg" id="floatingSelect" aria-label="Floating label select example" name="sizesOptions" [ngModel]="selectedSize" (ngModelChange)="toggleSize($event)">
+                    <option [ngValue]="size" *ngFor="let size of sizes">{{size.talla}}</option>
+                  </select>
+                  <label for="floatingSelect">Seleccione talla</label>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="fs-2">Seleccione Color.</p>
-            <div class="row row-cols-2" *ngFor="let color of colors">
-              <div class="col">
-                <button type="button" class="btn btn-secondary btn-lg" (click)="toggleColor(color.id)" style="background-color: blue" >{{color.color}}</button>
+          <p class="fs-2 m-2">Seleccione Color.</p>
+            <div class="row row-cols-1 row-cols-md-3 m-3">
+              <div *ngFor="let color of FilteredColorsBySize">
+                <app-select-button [color]="color" (colorSelection)="toggleColor($event)"></app-select-button>
               </div>
             </div>
-          <div>
-              <span class="cantidad">cantidad: </span> 
-              <input type="number" [(ngModel)]="quantitySelected" class="form-control-md" id="quantityInput">
-              <div *ngIf="quantityLimit != 0; then thenBlock else elseBlock"></div>
-                <ng-template #thenBlock>
-                  <span class="QuantityInStock"> ({{quantityLimit}} disponibles)</span>
-                </ng-template>
-                <ng-template #elseBlock>
-                  <span class="QuantityInStock"> ({{noItemsMesage}})</span>
-                </ng-template>
-
+        <div>
+        <div class="container text-center m-3">
+          <span class="cantidad">cantidad: </span> 
+          <input type="number" [(ngModel)]="quantitySelected" class="form-control-sm" id="quantityInput"  min="1" max="{{quantityLimit}}" value="2">
+          <div *ngIf="quantityLimit != 0; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <span class="QuantityInStock"> ({{quantityLimit}} disponibles)</span>
+            </ng-template>
+            <ng-template #elseBlock>
+              <span class="QuantityInStock"> ({{noItemsMesage}})</span>
+            </ng-template>
           </div>
-          <div class="row">
-              <div class="col">
-                <button type="button" class="btn btn-primary btn-lg" (click)="itemToCart()">Agregar al carrito</button>
-              </div>
-              <div class="col">
-                <button type="button" class="btn btn-primary btn-lg" (click)="goToCart()">Ver Mi carrito</button>
-              </div>
-            </div>
         </div>
-      </div>
-      <hr size="8px"/>
+          <div class="row m-3">
+            <div class="col">
+              <button type="button" class="btn btn-primary btn-lg" (click)="itemToCart()">Agregar al carrito</button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-primary btn-lg" (click)="goToCart()">Ver Mi carrito</button>
+            </div>
+          </div>
+    </div>
   </div>
+</div>
 </ng-container>

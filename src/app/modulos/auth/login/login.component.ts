@@ -23,7 +23,11 @@ export class LoginComponent {
         if (response.state) {
           this._servicio.session = response;  // Asigna información del token
       }
+<<<<<<< HEAD:src/app/modulos/auth/login/login.component.ts
         this._router.navigate(['Tienda/home']);
+=======
+        this._router.navigate(['Tienda/home/man']);
+>>>>>>> 2249c2deec4142e1bc61a7a71b6e2c5d15376162:FrontEcommerce/src/app/modulos/auth/login/login.component.ts
       }).add(() => {
 
       });
